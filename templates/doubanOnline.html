@@ -110,7 +110,7 @@
 </div>
 <script type="text/javascript" src="/static/js/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/static/js/jqcloud-1.0.4.js"></script>
-<linkrel="stylesheet" type="text/css" href="/static/css/jqcloud.css"/>
+<link href="/static/css/jqcloud.css" rel="stylesheet" type="text/css">
 <script type='text/javascript'>
 $(document).ready(function () { 
 	var query = setInterval(function() {
@@ -126,7 +126,7 @@ $(document).ready(function () {
 		            		var word_list = new Array(); 
 		            		var index = 0;
 		            		for(var key in wc) {
-		            			word_list[index] = {text: key, weight:wc[key]*50};
+		            			word_list[index] = {text: key, weight:wc[key]*80};
 		            			index = index + 1;
 		            			if(index>150){
 		            				break;

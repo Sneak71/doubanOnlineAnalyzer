@@ -8,6 +8,7 @@ import json
 import jieba
 import codecs
 import os
+import settings
 
 def runSpider(spiderName, online1st, jsonName):
 	'''using scrapy to get infomation
@@ -23,7 +24,7 @@ def runAnalyze(jsonName):
 	'''calculate the frequency of words
 	'''
 	print "begin to calculate the frequency of words~~"
-	wc = sorted(_genWordCount(jsonName).iteritems(), key=lambda item:item[1],reverse=True) 
+	wc = sorted(_genWordCount(jsonName,settings.nonsense).iteritems(), key=lambda item:item[1],reverse=True) 
 	json.dump(
 		{item[0]:item[1] for item in wc},
 		codecs.open("%s.wc.tmp"%jsonName, "w", 'utf-8'), 
