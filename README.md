@@ -5,7 +5,11 @@
 1. scrapy
 2. web.py
 
-# 启动
+# 使用
+1. 启动
 ```
 python doubanOnline.py
 ```
+2. 访问：http://服务器IP:8080/douban/online
+3. 输入某个豆瓣在线活动的地址，点击查看
+![](/master/show.PNG) 
