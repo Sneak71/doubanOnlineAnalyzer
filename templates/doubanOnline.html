@@ -1,0 +1,147 @@
+<html>
+<head>
+	<style type="text/css">
+	    .white-pink {
+			margin-left:auto;
+			margin-right:auto;
+			max-width: 700px;
+			background: #FFF;
+			padding: 30px 30px 20px 30px;
+			font: 12px Arial, Helvetica, sans-serif;
+			color: #666;
+			text-align: center;
+		}
+		.white-pink h1 {
+			padding: 0px 0px 10px 40px;
+			display: block;
+			border-bottom: 1px solid #e3e3e3;
+			margin: -10px -30px 10px -30px;
+			color: #555;
+		}
+		.white-pink h1>span {
+			display: block;
+			font-size: 11px;
+			color: #C4C2C2;
+		}
+		.white-pink label {
+			display: block;
+			margin: 0px 0px 5px;
+		}
+		.white-pink label>span {
+			float: left;
+			width: 20%;
+			text-align: right;
+			padding-right: 10px;
+			margin-top: 10px;
+			color: #969696;
+		}
+		.white-pink th {
+			display: none;
+		}
+		.white-pink input[type="text"]{
+			border-radius: 4px;
+			color: #555;
+			width: 77%;
+			padding: 3px 0px 3px 5px;
+			margin: 5px 285px 14px 100px;
+			border: 1px solid #e5e5e5;
+			background: #fbfbfb;
+			height: 27px;
+			line-height:15px;
+			outline: 0;
+			-webkit-box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+			box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+		}
+		.white-pink .button {
+			background: #FFF;
+			border: 1px solid #CCC;
+			padding: 5px 15px 5px 15px;
+			color: #333;
+			border-radius: 4px;
+			margin: -50px 0px 0px 300px;
+		}
+		.white-pink .button:hover {
+			color: #333;
+			background-color: #EBEBEB;
+			border-color: #ADADAD;
+		}
+		.topic {
+			
+			margin: -55px 270px;
+		}
+		.topic #name {
+			display: block;
+			margin: 10px;
+    		font-size: 15px;
+    		color: #15864E;
+		}
+		.topic #topicinfo {
+			margin: 10px;
+			font-size: 13px;
+			color: #544242;
+		}
+	</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>豆瓣线上活动</title>
+</head>
+<body>
+<div style="margin:0px auto;padding-top: 100px;">
+<form action="" method="post" class="white-pink">
+	<h1>豆瓣线上活动关键词云
+		<span>大家都在想些什么~~</span>
+	</h1>
+	<label>
+		<!--<span>Your Name :</span>-->
+		{{ form.render() }}
+	</label>
+	<label>
+		<span>&nbsp;</span>
+		<input type="submit" class="button" value="查看" />
+	</label>
+</form>
+<br />
+<br />
+<br />
+<div class="topic">
+	<span id="name" name="{{ index }}">{{ name }}</span>
+	<span id="topicinfo">{{ topic }}</span>
+	<div id="wordCloud" style="width: 550px; height: 350px;"></div>
+</div>
+</div>
+<script type="text/javascript" src="/static/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jqcloud-1.0.4.js"></script>
+<linkrel="stylesheet" type="text/css" href="/static/css/jqcloud.css"/>
+<script type='text/javascript'>
+$(document).ready(function () { 
+	var query = setInterval(function() {
+		alert($("#wordCloud").val()); 
+		if($("#wordCloud").val() == "") {
+			$.ajax({
+		            url:'/douban/online/query',   
+		            type:'get',
+		            data:"name=" + $("#name").attr("name"),
+		            success: function(data, textStatus){
+		            	if(data) {
+		            		//display
+		            		var wc = JSON.parse(data)
+		            		var word_list = new Array(); 
+		            		var index = 0;
+		            		for(var key in wc) {
+		            			word_list[index] = {text: key, weight:wc[key]*50};
+		            			index = index + 1;
+		            			if(index>150){
+		            				break;
+		            			}
+		            		}
+		            		$("#wordCloud").jQCloud(word_list);
+		            		//$("#wordCloud").text(data);
+		                	clearInterval(query);
+		            	} 
+		            }
+		        });
+		}
+	},10000); 
+}); 
+</script>
+</body>
+</html>
