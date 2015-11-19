@@ -53,10 +53,10 @@ if __name__ == '__main__':
 	print sys.argv
 	if len(sys.argv) > 3:
 		spiderName, online1st, jsonName = sys.argv[1], sys.argv[2],sys.argv[3]
-		#rc = runSpider(spiderName, online1st, jsonName)
-		#if rc == 0:
-			#runAnalyze(jsonName)
-		#else:
-			#print "Opssssss.... the returnCode is %d, maybe there is something wrong~~" % rc
-		runAnalyze(jsonName)
+		rc = runSpider(spiderName, online1st, jsonName)
+		if rc == 0:
+			runAnalyze(jsonName)
+		else:
+			print "Opssssss.... the returnCode is %d, maybe there is something wrong~~" % rc
+		#runAnalyze(jsonName)
 		
