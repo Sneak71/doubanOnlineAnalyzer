@@ -12,4 +12,4 @@ python doubanOnline.py
 ```
 2. 访问：http://服务器IP:8080/douban/online
 3. 输入某个豆瓣在线活动的地址，点击查看
-![](/master/show.PNG) 
+![](/show.PNG) 
