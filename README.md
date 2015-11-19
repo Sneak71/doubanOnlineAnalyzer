@@ -4,6 +4,7 @@
 # 依赖第三方
 1. scrapy
 2. web.py
+3. jieba
 
 # 使用
 1. 启动
